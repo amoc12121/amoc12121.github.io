@@ -3,18 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal portfolio website">
-  <title>My Portfolio</title>
+  <meta name="description" content="Sehun Oh — Computer Science & Engineering student portfolio">
+  <title>Sehun Oh | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f172a;
-      --surface: #1e293b;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #6366f1;
-      --accent-hover: #818cf8;
-      --border: #334155;
-      --max-width: 960px;
+      --primary: #0075de;
+      --primary-active: #005bab;
+      --secondary: #213183;
+      --canvas: #ffffff;
+      --canvas-soft: #f6f5f4;
+      --surface: #ffffff;
+      --ink: #000000;
+      --ink-secondary: #31302e;
+      --ink-muted: #615d59;
+      --ink-faint: #a39e98;
+      --hairline: #e6e6e6;
+      --accent-sky: #62aef0;
+      --accent-purple: #d6b6f6;
+      --accent-pink: #ff64c8;
+      --accent-orange: #dd5b00;
+      --accent-teal: #2a9d99;
+      --accent-green: #1aae39;
+      --rounded-xs: 4px;
+      --rounded-md: 8px;
+      --rounded-lg: 12px;
+      --rounded-full: 9999px;
+      --max-width: 1080px;
+      --shadow-soft:
+        rgba(0, 0, 0, 0.01) 0 0.175px 1.041px,
+        rgba(0, 0, 0, 0.02) 0 0.8px 2.925px,
+        rgba(0, 0, 0, 0.027) 0 2.025px 7.847px,
+        rgba(0, 0, 0, 0.04) 0 4px 18px;
     }
 
     *, *::before, *::after {
@@ -27,19 +49,26 @@
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--canvas-soft);
+      color: var(--ink);
+      line-height: 1.5;
+      font-size: 16px;
+      font-weight: 400;
     }
 
     a {
-      color: var(--accent-hover);
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--primary-active);
     }
 
     a:focus-visible,
     button:focus-visible {
-      outline: 2px solid var(--accent-hover);
+      outline: 2px solid var(--primary);
       outline-offset: 2px;
     }
 
@@ -47,12 +76,11 @@
       position: absolute;
       top: -100%;
       left: 1rem;
-      background: var(--accent);
+      background: var(--primary);
       color: #fff;
       padding: 0.5rem 1rem;
-      border-radius: 0.375rem;
+      border-radius: var(--rounded-full);
       z-index: 100;
-      text-decoration: none;
     }
 
     .skip-link:focus {
@@ -63,95 +91,78 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
+      background: var(--canvas);
+      border-bottom: 1px solid var(--hairline);
     }
 
     nav {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 1rem 1.5rem;
+      padding: 16px 24px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 12px;
     }
 
     .logo {
       font-weight: 700;
-      font-size: 1.125rem;
-      color: var(--text);
-      text-decoration: none;
+      font-size: 15px;
+      color: var(--ink);
+      letter-spacing: -0.125px;
     }
 
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem 1.25rem;
+      gap: 8px 20px;
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
     .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.95rem;
+      color: var(--ink-secondary);
+      font-size: 15px;
       transition: color 0.2s;
     }
 
     .nav-links a:hover,
     .nav-links a:focus-visible {
-      color: var(--text);
+      color: var(--ink);
     }
 
-    main {
+    .hero-band {
+      background: var(--secondary);
+      color: #fff;
+      padding: 48px 24px 56px;
+    }
+
+    .hero-inner {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
-    }
-
-    section {
-      scroll-margin-top: 5rem;
-      margin-bottom: 4rem;
-    }
-
-    h1, h2, h3 {
-      line-height: 1.25;
-    }
-
-    h2 {
-      font-size: 1.75rem;
-      margin: 0 0 1.25rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--accent);
-      display: inline-block;
-    }
-
-    .hero {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 28px;
       align-items: center;
-      padding: 2rem 0 3rem;
     }
 
     @media (min-width: 640px) {
-      .hero {
+      .hero-inner {
         grid-template-columns: auto 1fr;
       }
     }
 
     .profile-image {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
+      width: 160px;
+      height: 160px;
+      border-radius: var(--rounded-full);
       object-fit: cover;
-      border: 4px solid var(--accent);
+      border: 3px solid rgba(255, 255, 255, 0.3);
       display: block;
       margin: 0 auto;
+      box-shadow: var(--shadow-soft);
     }
 
     @media (min-width: 640px) {
@@ -161,26 +172,80 @@
     }
 
     .hero-text h1 {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      margin: 0 0 0.5rem;
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin: 0 0 12px;
     }
 
     .hero-text .subtitle {
-      color: var(--accent-hover);
-      font-size: 1.125rem;
-      margin: 0 0 1rem;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.125px;
+      margin: 0 0 16px;
+      color: var(--accent-sky);
     }
 
     .hero-text p {
-      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
       margin: 0;
       max-width: 52ch;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .sticker-dots {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .sticker-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: var(--rounded-full);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+
+    section {
+      scroll-margin-top: 5rem;
+      margin-bottom: 56px;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin: 0 0 24px;
+      color: var(--ink);
+    }
+
+    h3 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.27;
+      letter-spacing: -0.25px;
+      margin: 0 0 8px;
+    }
+
+    .section-lead {
+      color: var(--ink-muted);
+      margin: -12px 0 24px;
+      max-width: 60ch;
     }
 
     .card-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 16px;
     }
 
     @media (min-width: 600px) {
@@ -189,50 +254,111 @@
       }
     }
 
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 0.75rem;
-      padding: 1.25rem;
+    @media (min-width: 900px) {
+      .card-grid.three-col {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
-    .card h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.1rem;
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
     }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .card.accent-purple::before { background: var(--accent-purple); }
+    .card.accent-pink::before { background: var(--accent-pink); }
+    .card.accent-teal::before { background: var(--accent-teal); }
+    .card.accent-orange::before { background: var(--accent-orange); }
+    .card.accent-green::before { background: var(--accent-green); }
+    .card.accent-sky::before { background: var(--accent-sky); }
 
     .card p {
       margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
+      color: var(--ink-muted);
+      font-size: 15px;
+      line-height: 1.33;
+    }
+
+    .card-featured {
+      background: var(--canvas-soft);
     }
 
     .btn {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 0.625rem 1.25rem;
-      background: var(--accent);
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: var(--primary);
       color: #fff;
-      text-decoration: none;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      font-size: 0.95rem;
+      border-radius: var(--rounded-full);
+      font-weight: 500;
+      font-size: 16px;
       transition: background 0.2s;
     }
 
     .btn:hover {
-      background: var(--accent-hover);
+      background: var(--primary-active);
+      color: #fff;
+    }
+
+    .course-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .course-list li {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--rounded-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: var(--surface);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.125px;
+      padding: 4px 10px;
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--hairline);
+      white-space: nowrap;
     }
 
     .contact-list {
       list-style: none;
       padding: 0;
       margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--rounded-lg);
+      overflow: hidden;
     }
 
     .contact-list li {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--hairline);
+      font-size: 15px;
     }
 
     .contact-list li:last-child {
@@ -241,16 +367,62 @@
 
     .contact-list strong {
       display: inline-block;
-      min-width: 5rem;
-      color: var(--muted);
+      min-width: 5.5rem;
+      color: var(--ink-muted);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.125px;
+      text-transform: uppercase;
+    }
+
+    .ai-usage {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .ai-usage dl {
+      margin: 0;
+    }
+
+    .ai-usage dt {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.125px;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .ai-usage dd {
+      margin: 0 0 20px;
+      color: var(--ink-secondary);
+      font-size: 15px;
+    }
+
+    .ai-usage dd:last-child {
+      margin-bottom: 0;
+    }
+
+    .prompt-box {
+      background: var(--canvas-soft);
+      border: 1px solid var(--hairline);
+      border-radius: var(--rounded-md);
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-secondary);
     }
 
     footer {
+      background: var(--canvas-soft);
+      border-top: 1px solid var(--hairline);
       text-align: center;
-      padding: 2rem 1.5rem;
-      color: var(--muted);
-      font-size: 0.875rem;
-      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      color: var(--ink-secondary);
+      font-size: 14px;
     }
   </style>
 </head>
@@ -259,58 +431,76 @@
 
   <header>
     <nav aria-label="Main navigation">
-      <a class="logo" href="#top">Portfolio</a>
+      <a class="logo" href="#top">Sehun Oh</a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#resume">Resume</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#courses">Courses</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="#ai-usage">AI Usage</a></li>
       </ul>
     </nav>
   </header>
 
-  <main id="main-content">
-    <section id="top" class="hero" aria-labelledby="hero-heading">
+  <section id="top" class="hero-band" aria-labelledby="hero-heading">
+    <div class="hero-inner">
       <img
         src="assets/profile.png"
-        alt="Profile photo"
+        alt="Sehun Oh profile photo"
         class="profile-image"
-        width="180"
-        height="180"
+        width="160"
+        height="160"
       >
       <div class="hero-text">
-        <h1 id="hero-heading">Your Name</h1>
+        <h1 id="hero-heading">Sehun Oh</h1>
         <p class="subtitle">Computer Science &amp; Engineering</p>
         <p>
-          Hello! I am a student passionate about software development and building
-          meaningful projects. Welcome to my personal website.
+          I am interested in software engineering, web development, and building
+          practical applications. I enjoy learning new technologies and turning
+          ideas into working projects.
+        </p>
+        <div class="sticker-dots" aria-hidden="true">
+          <span class="sticker-dot" style="background: var(--accent-purple)"></span>
+          <span class="sticker-dot" style="background: var(--accent-pink)"></span>
+          <span class="sticker-dot" style="background: var(--accent-teal)"></span>
+          <span class="sticker-dot" style="background: var(--accent-orange)"></span>
+          <span class="sticker-dot" style="background: var(--accent-green)"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <p class="section-lead">A short introduction about who I am and what I study.</p>
+      <div class="card card-featured">
+        <p>
+          My name is <strong>Sehun Oh</strong>, and I am majoring in
+          <strong>Computer Science &amp; Engineering</strong> at Seoul National University.
+          I am passionate about programming, problem solving, and creating useful software.
+          Through coursework and club activities, I continue to grow as a developer and
+          explore areas such as object-oriented design, web technologies, and algorithms.
         </p>
       </div>
     </section>
 
-    <section id="about" aria-labelledby="about-heading">
-      <h2 id="about-heading">About Me</h2>
-      <p>
-        I am studying Computer Science and Engineering. I enjoy learning new
-        technologies, collaborating on team projects, and turning ideas into
-        working software.
-      </p>
-    </section>
-
     <section id="resume" aria-labelledby="resume-heading">
       <h2 id="resume-heading">CV / Resume</h2>
-      <div class="card-grid">
-        <article class="card">
+      <p class="section-lead">Education, skills, and experience at a glance.</p>
+      <div class="card-grid three-col">
+        <article class="card accent-sky">
           <h3>Education</h3>
-          <p>Seoul National University — Computer Science &amp; Engineering</p>
+          <p>Seoul National University<br>Computer Science &amp; Engineering</p>
         </article>
-        <article class="card">
+        <article class="card accent-purple">
           <h3>Skills</h3>
-          <p>C++, Python, Java, HTML, CSS, Git</p>
+          <p>C++, Python, Java, HTML, CSS, Git, Data Structures</p>
         </article>
-        <article class="card">
+        <article class="card accent-teal">
           <h3>Experience</h3>
-          <p>Course projects and club activities in software development.</p>
+          <p>OOP course projects, programming club activities, and personal web development projects.</p>
         </article>
       </div>
       <a class="btn" href="assets/cv.pdf" download>Download CV (PDF)</a>
@@ -318,29 +508,71 @@
 
     <section id="projects" aria-labelledby="projects-heading">
       <h2 id="projects-heading">Projects</h2>
+      <p class="section-lead">Course work, club activities, and personal projects.</p>
       <div class="card-grid">
-        <article class="card">
+        <article class="card accent-orange">
           <h3>OOP Course Project</h3>
-          <p>C++ class design and object-oriented programming practice.</p>
+          <p>C++ class design project focused on object-oriented programming principles, inheritance, and modular software architecture.</p>
         </article>
-        <article class="card">
+        <article class="card accent-pink">
           <h3>Programming Club</h3>
-          <p>Web development study and collaborative coding sessions.</p>
+          <p>Web development study group — learned HTML, CSS, and collaborative coding through weekly sessions and small team projects.</p>
+        </article>
+        <article class="card accent-green">
+          <h3>Personal Website</h3>
+          <p>Built this GitHub Pages portfolio using AI-assisted vibe coding with a Notion-inspired design system.</p>
+        </article>
+        <article class="card accent-purple">
+          <h3>Algorithm Practice</h3>
+          <p>Solved competitive programming problems in C++ and Python to strengthen data structure and algorithm skills.</p>
         </article>
       </div>
     </section>
 
+    <section id="courses" aria-labelledby="courses-heading">
+      <h2 id="courses-heading">Courses I Plan to Take</h2>
+      <p class="section-lead">Upcoming courses I am excited to study.</p>
+      <ul class="course-list">
+        <li><span class="course-badge">CS</span> Operating Systems</li>
+        <li><span class="course-badge">CS</span> Database Systems</li>
+        <li><span class="course-badge">CS</span> Machine Learning</li>
+        <li><span class="course-badge">CS</span> Computer Networks</li>
+        <li><span class="course-badge">CS</span> Software Engineering</li>
+      </ul>
+    </section>
+
     <section id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Contact</h2>
+      <p class="section-lead">Feel free to reach out.</p>
       <ul class="contact-list">
-        <li><strong>Email</strong> <a href="mailto:your@snu.ac.kr">your@snu.ac.kr</a></li>
+        <li><strong>Email</strong> <a href="mailto:dhtpgns0118@gmail.com">dhtpgns0118@gmail.com</a></li>
         <li><strong>GitHub</strong> <a href="https://github.com/amoc12121" target="_blank" rel="noopener noreferrer">github.com/amoc12121</a></li>
       </ul>
+    </section>
+
+    <section id="ai-usage" aria-labelledby="ai-heading">
+      <h2 id="ai-heading">AI Usage</h2>
+      <p class="section-lead">This website was created with the help of an AI coding tool.</p>
+      <div class="ai-usage">
+        <dl>
+          <dt>Tool</dt>
+          <dd>Cursor</dd>
+          <dt>Prompt Used</dt>
+          <dd>
+            <div class="prompt-box">
+              Build a static personal website in the repo root. Use assets/profile.jpg or
+              assets/profile.png as the profile image. Link assets/cv.pdf from the CV or
+              Resume section. Keep the site simple and compatible with GitHub Pages. Do not
+              use a backend or paid external API. Make the page responsive and accessible.
+            </div>
+          </dd>
+        </dl>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 Your Name. Built with GitHub Pages.</p>
+    <p>&copy; 2026 Sehun Oh. Built with GitHub Pages.</p>
   </footer>
 </body>
 </html>
