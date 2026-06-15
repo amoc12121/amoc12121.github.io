@@ -1,1 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio website">
+  <title>My Portfolio</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #6366f1;
+      --accent-hover: #818cf8;
+      --border: #334155;
+      --max-width: 960px;
+    }
 
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-hover);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent-hover);
+      outline-offset: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      z-index: 100;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    section {
+      scroll-margin-top: 5rem;
+      margin-bottom: 4rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.25;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin: 0 0 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem 0 3rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        grid-template-columns: auto 1fr;
+      }
+    }
+
+    .profile-image {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      display: block;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 640px) {
+      .profile-image {
+        margin: 0;
+      }
+    }
+
+    .hero-text h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin: 0 0 0.5rem;
+    }
+
+    .hero-text .subtitle {
+      color: var(--accent-hover);
+      font-size: 1.125rem;
+      margin: 0 0 1rem;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      margin: 0;
+      max-width: 52ch;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 600px) {
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+    }
+
+    .card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.625rem 1.25rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact-list li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-list li:last-child {
+      border-bottom: none;
+    }
+
+    .contact-list strong {
+      display: inline-block;
+      min-width: 5rem;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <nav aria-label="Main navigation">
+      <a class="logo" href="#top">Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="top" class="hero" aria-labelledby="hero-heading">
+      <img
+        src="assets/profile.png"
+        alt="Profile photo"
+        class="profile-image"
+        width="180"
+        height="180"
+      >
+      <div class="hero-text">
+        <h1 id="hero-heading">Your Name</h1>
+        <p class="subtitle">Computer Science &amp; Engineering</p>
+        <p>
+          Hello! I am a student passionate about software development and building
+          meaningful projects. Welcome to my personal website.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <p>
+        I am studying Computer Science and Engineering. I enjoy learning new
+        technologies, collaborating on team projects, and turning ideas into
+        working software.
+      </p>
+    </section>
+
+    <section id="resume" aria-labelledby="resume-heading">
+      <h2 id="resume-heading">CV / Resume</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Education</h3>
+          <p>Seoul National University — Computer Science &amp; Engineering</p>
+        </article>
+        <article class="card">
+          <h3>Skills</h3>
+          <p>C++, Python, Java, HTML, CSS, Git</p>
+        </article>
+        <article class="card">
+          <h3>Experience</h3>
+          <p>Course projects and club activities in software development.</p>
+        </article>
+      </div>
+      <a class="btn" href="assets/cv.pdf" download>Download CV (PDF)</a>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>OOP Course Project</h3>
+          <p>C++ class design and object-oriented programming practice.</p>
+        </article>
+        <article class="card">
+          <h3>Programming Club</h3>
+          <p>Web development study and collaborative coding sessions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact</h2>
+      <ul class="contact-list">
+        <li><strong>Email</strong> <a href="mailto:your@snu.ac.kr">your@snu.ac.kr</a></li>
+        <li><strong>GitHub</strong> <a href="https://github.com/amoc12121" target="_blank" rel="noopener noreferrer">github.com/amoc12121</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Your Name. Built with GitHub Pages.</p>
+  </footer>
+</body>
+</html>
